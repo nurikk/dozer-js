@@ -1,6 +1,6 @@
 import { EventType, FieldDefinition, Operation } from "./generated/protos/types_pb";
 import { CountResponse, GetFieldsResponse } from "./generated/protos/common_pb";
-import { DozerQuery } from "./query_helper";
+import { DozerFilter, DozerQuery } from "./query_helper";
 import { HealthCheckResponse } from "./generated/protos/health_pb";
 import { ClientReadableStream } from "grpc-web";
 export interface ApiClientOptions {
@@ -16,6 +16,6 @@ export declare class ApiClient {
     healthCheck(): Promise<HealthCheckResponse>;
     count(query?: DozerQuery | null): Promise<CountResponse>;
     query(query?: DozerQuery | null): Promise<[FieldDefinition[], Object[]]>;
-    onEvent(eventType?: EventType): ClientReadableStream<Operation>;
+    onEvent(eventType?: EventType, filter?: DozerFilter | null): ClientReadableStream<Operation>;
     getFields(): Promise<GetFieldsResponse>;
 }
